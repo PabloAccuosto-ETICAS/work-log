@@ -24,7 +24,7 @@ project is in a stable resting state.
 | Project | Status this week | Notes |
 |---|---|---|
 | Career Scoops audit | Repo bootstrap complete + pattern aligned | No client activity. Awaiting any Gates follow-up signal. |
-| Wiselook audit | Active (Phase 1: Bias & Fairness) | Worked in a parallel session not captured here yet. Handoff document prepared for that session to integrate Wiselook with the work-log. |
+| Wiselook audit | Pattern aligned; awaiting partner API credentials | Repo bootstrap and rename to `meta/` completed Monday May 04. No audit-content activity this week — Phase 1 (Bias & Fairness) blocked on partner API credentials from Wiselook (requested 27 April, reminded 29 April). |
 | ai-ops (transversal) | Pattern stabilised, repo synced | The setup pattern was rewritten and both Career Scoops and Wiselook aligned. |
 | Work log (this repo) | Bootstrapped today | First week's entry written for W19. |
 
@@ -36,9 +36,10 @@ project is in a stable resting state.
   May 04.
 - Clean up project knowledge for Career Scoops (delete the 9 legacy
   files).
-- Wiselook session: integrate Wiselook with the work-log via the
-  handoff document; populate this week's Wiselook section.
-- Continue Wiselook Phase 1 work in parallel sessions.
+- Apply the work-log Personal customisation bullet to Wiselook's
+  project instructions.
+- Continue Wiselook Phase 1 work once partner API credentials land
+  (or in parallel: vignette drafting for the 5 ECOs).
 
 ## Where to look
 

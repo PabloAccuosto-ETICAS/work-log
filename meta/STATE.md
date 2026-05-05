@@ -4,20 +4,23 @@
 > (that's what `log/<year>/<year>-WNN.md` is for).
 
 **Current week:** 2026-W19 (May 04 – May 10, 2026)
-**Last updated:** 2026-05-04
+**Last updated:** 2026-05-05
 
 ---
 
 ## This week's focus
 
-The dominant work this week so far was operational: pattern
-alignment across two Eticas project repos and consolidation of the
-work setup itself (project knowledge cleanup, M365 connector
-configuration, this work-log repo bootstrap). Most of it landed on
-Monday May 04. The rest of the week is open.
+Monday opened as a *plumbing day*: pattern alignment across the
+Eticas project repos and consolidation of the work setup itself
+(project knowledge cleanup, M365 connector configuration, this
+work-log repo bootstrap). Tuesday shifted to post-release work on
+the risk taxonomy: documentation refresh, an internal nav fix, the
+taxonomy itself adopting the Claude project pattern, and
+incorporating a stress-test review with corrections for the next
+release. v0.3.0 itself shipped last week.
 
-There is no client-facing work on Career Scoops scheduled. The
-project is in a stable resting state.
+Wiselook content remains paused on partner API credentials. Career
+Scoops has no active client work.
 
 ## Active across projects
 
@@ -25,8 +28,9 @@ project is in a stable resting state.
 |---|---|---|
 | Career Scoops audit | Repo bootstrap complete + pattern aligned | No client activity. Awaiting any Gates follow-up signal. |
 | Wiselook audit | Pattern aligned; awaiting partner API credentials | Repo bootstrap and rename to `meta/` completed Monday May 04. No audit-content activity this week — Phase 1 (Bias & Fairness) blocked on partner API credentials from Wiselook (requested 27 April, reminded 29 April). |
-| ai-ops (transversal) | Pattern stabilised, repo synced | The setup pattern was rewritten and both Career Scoops and Wiselook aligned. |
-| Work log (this repo) | Bootstrapped today | First week's entry written for W19. |
+| Risk taxonomy | Post-release work + Claude pattern adoption | Two PRs merged this week: documentation refresh and internal nav fix. Claude project pattern adoption underway (the repo gets `meta/`; new dedicated Claude project on Eticas Team account). Validation review and TC260+CoE proposal queued for next release. Cloudflare migration scheduled for next week. v0.3.0 itself shipped last week. |
+| ai-ops (transversal) | Pattern stable; in use across three projects | Pattern was stabilised last week. Career Scoops and Wiselook were aligned then; risk taxonomy aligning this week. |
+| Work log (this repo) | Bootstrapped Monday May 04 | First week's entry written for W19. |
 
 ## What's coming up
 
@@ -37,9 +41,19 @@ project is in a stable resting state.
 - Clean up project knowledge for Career Scoops (delete the 9 legacy
   files).
 - Apply the work-log Personal customisation bullet to Wiselook's
-  project instructions.
+  project instructions. → Done Monday May 04.
 - Continue Wiselook Phase 1 work once partner API credentials land
   (or in parallel: vignette drafting for the 5 ECOs).
+- Apply `meta/` folder and instructions block to `ai-risk-taxonomy`.
+  Update the inventory entry in `Eticas-AI/ai-ops/inventory.md`.
+- Create the new Claude project for risk taxonomy on the Eticas Team
+  account. Paste the instructions block. Validate with a
+  session-start prompt; verify Claude enters via `meta/STATE.md` in
+  the order specified by the instructions.
+- Cloudflare migration setup for `ai-risk-taxonomy` (~2 hours,
+  scheduled for next week). Make repo private; configure GitHub
+  Actions to deploy outputs to Cloudflare Pages; configure Cloudflare
+  Access on `/risk-internal/`.
 
 ## Where to look
 
@@ -49,8 +63,11 @@ project is in a stable resting state.
 ## Pulse
 
 The week opened with a *plumbing day*: lots of structural changes
-that make future work easier but produced no client-facing output.
-This is expected — the projects are stable and the operational
-layer needed attention. The rest of the week is likely to shift
-back toward project content (most likely Wiselook, given Career
-Scoops has no active work scheduled).
+that produced no client-facing output but make future work easier.
+Tuesday shifted toward post-release work on the risk taxonomy —
+documentation refresh, internal nav fix, the migration to the
+Claude project pattern (the operational layer the other projects
+already use), and incorporation of a stress-test review for the
+next release. v0.3.0 itself shipped last week. Wiselook content
+remains blocked on partner API credentials; Career Scoops has no
+active work. The rest of the week is open.

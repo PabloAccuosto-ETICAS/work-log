@@ -43,6 +43,27 @@ interpretation of an ambiguous request), state the assumption in
 your response and continue — Pablo can correct in the next turn if
 the assumption was wrong.
 
+## GitHub access (PAT)
+
+**Behaviour: `ask-on-start` for `Eticas-AI/*` repos only.** At the
+start of a session, announce that a PAT may be needed for operations
+beyond the MCP connector (tags, GitHub Releases, workflow files,
+bulk edits) on Eticas-AI repos, and let Pablo decide per-session
+whether to provide one. The full protocol is in
+[`Eticas-AI/ai-ops/instructions-common.md`](https://github.com/Eticas-AI/ai-ops/blob/main/instructions-common.md)
+under "GitHub access beyond the MCP connector".
+
+**For Pablo's personal repos (`PabloAccuosto-ETICAS/*`): MCP only.**
+No PAT, no announcement. The volume and frequency of changes to
+personal repos (mainly `work-log`) doesn't justify the friction of
+juggling a second PAT in the same session. If a session genuinely
+needs an operation the MCP connector cannot perform on a personal
+repo (e.g., creating a tag on `work-log` — unlikely), flag the gap
+and Pablo handles it manually outside the session.
+
+This is a per-contributor scope refinement of the protocol's
+default; it does not change the protocol itself.
+
 ## End-of-session: work-log entry
 
 In addition to the project's own end-of-session protocol (deltas to

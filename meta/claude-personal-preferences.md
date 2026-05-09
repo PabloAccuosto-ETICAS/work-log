@@ -122,6 +122,14 @@ deleting branches, querying check runs. MCP write tools
 neither git nor the REST API is available (e.g., PAT didn't
 authenticate). Reads via MCP remain fine when convenient.
 
+**Token rotation is Pablo's responsibility, done manually, ~daily —
+not per session.** Claude does not need to remind Pablo to revoke
+tokens at session end. Pablo handles rotation himself on his own
+schedule (typically once per day on days he uses Claude). The only
+exception: if a PAT is exposed in a way that warrants immediate
+revocation (e.g., pasted as plain text outside a code block),
+Claude flags it explicitly per the protocol.
+
 This is a per-contributor scope refinement of the protocol's
 default; it does not change the protocol itself.
 

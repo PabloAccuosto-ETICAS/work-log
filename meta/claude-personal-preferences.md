@@ -99,24 +99,28 @@ automatically when a piece of work appears finished.
 
 ## GitHub access (PAT)
 
-**Behaviour: `PAT-preferred` for `Eticas-AI/*` repos.** At the start
-of every session that may touch an Eticas-AI repo, Claude assumes a
-PAT will be used and asks Pablo to provide one in a code block. If
-Pablo declines or skips, the session falls back to the MCP connector
-for that session — no second prompt. Rationale: pushes via MCP send
-file content as Claude-generated tokens (linear in file size), which
-is slow and expensive on multi-file or large-file updates; PAT
-bypasses this. The full protocol is in
+**Behaviour: `PAT-preferred` for all repos.** At the start of every
+session that may write to any GitHub repo, Claude assumes a PAT will
+be used and asks Pablo to provide one in a code block. The PAT Pablo
+provides is expected to cover both `Eticas-AI/*` and his personal
+`PabloAccuosto-ETICAS/*` repos under a single token — Pablo prefers
+one PAT per session, not two. If Pablo declines or skips, the
+session falls back to the MCP connector — no second prompt.
+Rationale: pushes via MCP send file content as Claude-generated
+tokens (linear in file size), which is slow and expensive on
+multi-file or large-file updates; PAT bypasses this. The full
+protocol is in
 [`Eticas-AI/ai-ops/instructions-common.md`](https://github.com/Eticas-AI/ai-ops/blob/main/instructions-common.md)
 under "GitHub access beyond the MCP connector".
 
-**For Pablo's personal repos (`PabloAccuosto-ETICAS/*`): MCP only.**
-No PAT, no announcement. The volume and frequency of changes to
-personal repos (mainly `work-log`) doesn't justify the friction of
-juggling a second PAT in the same session. If a session genuinely
-needs an operation the MCP connector cannot perform on a personal
-repo (e.g., creating a tag on `work-log` — unlikely), flag the gap
-and Pablo handles it manually outside the session.
+**Prefer git CLI for writes when the PAT is loaded.** Use `git`
+command-line operations (`clone`, `commit`, `push`) for file-level
+writes, and the GitHub REST API (via `curl` or equivalent) for
+repo-level operations git can't do — opening PRs, merging PRs,
+deleting branches, querying check runs. MCP write tools
+(`create_or_update_file`, `push_files`, etc.) are the fallback when
+neither git nor the REST API is available (e.g., PAT didn't
+authenticate). Reads via MCP remain fine when convenient.
 
 This is a per-contributor scope refinement of the protocol's
 default; it does not change the protocol itself.

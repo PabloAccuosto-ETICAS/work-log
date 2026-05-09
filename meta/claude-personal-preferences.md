@@ -43,13 +43,70 @@ interpretation of an ambiguous request), state the assumption in
 your response and continue — Pablo can correct in the next turn if
 the assumption was wrong.
 
+## Pace and approval
+
+**Pause and seek approval before pushing changes to GitHub.** This
+applies to every operation that writes to a repo —
+`create_or_update_file`, `push_files`, branch creation, PRs, merges,
+tag/release creation. Before any such operation, Claude states the
+plan (what files, what commit message, which repo, which branch)
+and waits for Pablo's go-ahead. The default is one explicit
+approval per push.
+
+**Exception: explicit autonomous task.** When Pablo specifically
+asks for a multi-step task to be executed without intervention
+("hacé X, Y, Z y avisame al final", "ejecutá todo el flujo", or
+equivalent), Claude executes the full sequence and reports at the
+end. The exception requires Pablo's explicit framing, not Claude's
+inference from context.
+
+**Pace inside the session.** When uncertain whether to keep moving
+or pause, ask Pablo rather than deciding unilaterally. The right
+pace depends on the type of task — some work benefits from
+momentum, some from breaks to process. If Claude has produced a
+lot of output in one turn (multiple decisions, several drafts,
+dense technical content), check in with Pablo before continuing
+rather than assuming the next step is welcome.
+
+**Reading-only and analysis steps don't need approval.** Fetching
+files, running searches, triaging comments, drafting content for
+review in chat: all proceed normally without per-step confirmation.
+The bar applies to *writes to GitHub*, not to thinking out loud.
+
+## Don't assume the session is ending
+
+**Completing a task is not the same as ending the session.** A
+finished task — even a substantial one — may be one step in a
+larger flow Pablo has in mind. Before triggering any end-of-session
+action, ask Pablo whether the session is wrapping up or whether
+more work is coming. The end-of-session protocol runs once Pablo
+confirms, not on Claude's inference that "this seems like a good
+stopping point".
+
+End-of-session actions covered by this rule include:
+
+- Updates to the project's `meta/STATE.md` (priorities, recent
+  decisions, PK cache state).
+- New entries in the project's `meta/INTERNAL_LOG.md`.
+- Entries in the work-log (`PabloAccuosto-ETICAS/work-log/log/...`).
+- PK cache delivery (offering the updated cached file to be uploaded
+  to project knowledge).
+- Handover documents.
+
+These are checkpoints, not chronological closures — they should be
+proposed deliberately, after confirmation, rather than emitted
+automatically when a piece of work appears finished.
+
 ## GitHub access (PAT)
 
-**Behaviour: `ask-on-start` for `Eticas-AI/*` repos only.** At the
-start of a session, announce that a PAT may be needed for operations
-beyond the MCP connector (tags, GitHub Releases, workflow files,
-bulk edits) on Eticas-AI repos, and let Pablo decide per-session
-whether to provide one. The full protocol is in
+**Behaviour: `PAT-preferred` for `Eticas-AI/*` repos.** At the start
+of every session that may touch an Eticas-AI repo, Claude assumes a
+PAT will be used and asks Pablo to provide one in a code block. If
+Pablo declines or skips, the session falls back to the MCP connector
+for that session — no second prompt. Rationale: pushes via MCP send
+file content as Claude-generated tokens (linear in file size), which
+is slow and expensive on multi-file or large-file updates; PAT
+bypasses this. The full protocol is in
 [`Eticas-AI/ai-ops/instructions-common.md`](https://github.com/Eticas-AI/ai-ops/blob/main/instructions-common.md)
 under "GitHub access beyond the MCP connector".
 
@@ -73,6 +130,10 @@ current week's file in
 [`PabloAccuosto-ETICAS/work-log`](https://github.com/PabloAccuosto-ETICAS/work-log)
 under `log/<year>/<year>-W<NN>.md`, in the section corresponding to
 the project worked on.
+
+The "Don't assume the session is ending" rule above applies — the
+work-log entry is proposed only after Pablo confirms the session is
+wrapping up.
 
 Conventions for the entry:
 

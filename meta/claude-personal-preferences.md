@@ -108,8 +108,13 @@ one PAT per session, not two. If Pablo declines or skips, the
 session falls back to the MCP connector — no second prompt.
 Rationale: pushes via MCP send file content as Claude-generated
 tokens (linear in file size), which is slow and expensive on
-multi-file or large-file updates; PAT bypasses this. The full
-protocol is in
+multi-file or large-file updates; PAT bypasses this. Empirically,
+the MCP write tools also become unreliable beyond roughly 30 KB of
+payload — silent truncation, partial commits with misleading commit
+messages (the empirical threshold and failure mode are documented
+in [`Eticas-AI/ai-ops/claude-project-pattern.md`](https://github.com/Eticas-AI/ai-ops/blob/main/claude-project-pattern.md)
+§3). For any file near or above that size, the git CLI path is
+required, not optional. The full protocol is in
 [`Eticas-AI/ai-ops/instructions-common.md`](https://github.com/Eticas-AI/ai-ops/blob/main/instructions-common.md)
 under "GitHub access beyond the MCP connector".
 
@@ -136,7 +141,10 @@ default; it does not change the protocol itself.
 ## End-of-session: work-log entry
 
 In addition to the project's own end-of-session protocol (deltas to
-`STATE.md`, `INTERNAL_LOG.md`, `TRACKER.md` as applicable), at the
+`STATE.md`, the day-log entry in `meta/log/<today>.md`, plus an ADR
+or `CHANGELOG.md` entry as applicable per the project's conventions
+— see [`Eticas-AI/ai-ops/claude-project-pattern.md`](https://github.com/Eticas-AI/ai-ops/blob/main/claude-project-pattern.md)
+§2 for what each file holds), at the
 end of meaningful sessions also propose a short entry for the
 current week's file in
 [`PabloAccuosto-ETICAS/work-log`](https://github.com/PabloAccuosto-ETICAS/work-log)

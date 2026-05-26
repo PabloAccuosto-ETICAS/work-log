@@ -138,6 +138,22 @@ Claude flags it explicitly per the protocol.
 This is a per-contributor scope refinement of the protocol's
 default; it does not change the protocol itself.
 
+## Trello access
+
+**Behaviour: ask-when-needed.** Most sessions don't touch Trello. When a session needs to read or write a Trello card, Claude asks Pablo to paste the Trello API key and user token inside triple-backtick code blocks, saves them to `/home/claude/.trello_key` and `/home/claude/.trello_token` with mode 600, and calls `https://api.trello.com/1` directly via `bash_tool` + `curl`. Same handling rules as the PAT: never echo back, never write outside `/home/claude/`, shred on session close.
+
+Trello tokens typically have no expiration set; rotation is Pablo's responsibility, done manually when needed (not per session).
+
+**Reminder to surface proactively**: when Pablo wants to create a new Trello card for tracking a workstream (analogous to the existing Risk Taxonomy and Audit Methodology cards on `Eticas - Strategic Priorities`), Claude should mention the `create_trello_card.py` script in `PabloAccuosto-ETICAS/work-log/scripts/`. It reads a JSON spec (card name, description, labels, checklists with check items and their states) and creates the card end-to-end via the Trello REST API. The script reads credentials from a `.env` file in the working directory and falls back to shell-exported variables. Today the script only *creates* cards; extending it to *edit* existing cards (mark items complete, add/remove items, update description) is a future iteration worth proposing when it becomes useful.
+
+**Composio Trello MCP** is an alternative when its tools surface via `tool_search`. In projects where they don't load (verified empirically 2026-05-26 from inside `Eticas-AI/ai-audit-methodology` project — the `composio-trello-mcp` skill is in `available_skills` but `TRELLO_*` / `COMPOSIO_*` slugs do not return from `tool_search`), fall through to the direct REST API. Both paths produce equivalent results.
+
+Get credentials from https://trello.com/power-ups/admin. Three points of friction worth flagging when guiding Pablo through generation:
+
+- An Atlassian API token from `id.atlassian.com` is **not** a Trello token. Trello uses its own auth system despite the Atlassian acquisition.
+- Creating a Power-Up requires being a member (not guest) of at least one workspace. If Pablo is guest on the Eticas workspace, the fix is creating a personal workspace as the Power-Up container — tokens remain valid against the Eticas board because they are user-scoped, not workspace-scoped.
+- The "Allowed origins" field on the API key page is required even for CLI-only use. `http://localhost` works.
+
 ## End-of-session: work-log entry
 
 In addition to the project's own end-of-session protocol (deltas to

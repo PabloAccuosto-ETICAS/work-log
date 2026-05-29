@@ -97,6 +97,23 @@ These are checkpoints, not chronological closures — they should be
 proposed deliberately, after confirmation, rather than emitted
 automatically when a piece of work appears finished.
 
+## Script execution
+
+**Pablo runs scripts locally.** The working model is: Claude writes
+and edits code and commits it to the repo; Pablo runs it on his own
+machine, where the `.env` with real credentials lives. Three reasons:
+Claude should not have access to client API keys (Wiselook or
+otherwise — also an NDA consideration); running locally keeps Pablo
+close to what each step actually does; and Pablo's environment is
+already set up.
+
+**Claude does not run scripts that require real client credentials,
+and does not ask for those keys to be loaded into its sandbox.**
+Claude's sandbox use is limited to credential-free dry checks —
+compiling, importing, linting, offline logic, URL/shape resolution
+that needs no secret. Anything that needs a real key is handed to
+Pablo to run locally; Pablo brings back the output to iterate on.
+
 ## GitHub access (PAT)
 
 **Behaviour: `PAT-preferred` for all repos.** At the start of every

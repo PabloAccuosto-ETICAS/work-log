@@ -1,8 +1,10 @@
 # `meta/` — operational meta-state of the work log
 
-This folder is the entry point for any session working on this repo.
-Reading it gives a session enough context to know what the current
-week's focus is, where to write, and how the workflow runs.
+This README, together with the current week's log file, is the entry
+point for any session working on this repo. This file gives a session
+the workflow and conventions; the most recent
+`log/<year>/<year>-WNN.md` gives it what's currently in flight and
+where to write.
 
 This repo follows the canonical Eticas Claude project pattern
 documented at `Eticas-AI/ai-ops/claude-project-pattern.md`. Local
@@ -10,13 +12,11 @@ deviations are listed at the bottom of this file.
 
 ## Files in this folder
 
-- **`STATE.md`** — live view of the current week. What I'm working
-  on, what's active across projects, what's coming up. Overwrite-in-
-  place, refreshed each Monday or whenever the picture changes.
 - **`README.md`** — this file.
 
-There is no `CONTEXT.md` and no `INTERNAL_LOG.md` here. See
-"Local deviations" below for the rationale.
+That is all. There is no `STATE.md`, no `CONTEXT.md` and no
+`INTERNAL_LOG.md` here. See "Local deviations" below for the
+rationale.
 
 ## Workflow
 
@@ -31,10 +31,9 @@ There is no `CONTEXT.md` and no `INTERNAL_LOG.md` here. See
 
 **Starting a new week**:
 
-1. Create `log/<year>/<year>-W<NN>.md` for the new week.
-2. Update `meta/STATE.md` to reflect the new week's focus.
-3. Both can go in a single commit. Message: `meta: bootstrap week
-   <year>-W<NN>`.
+1. Create `log/<year>/<year>-W<NN>.md` for the new week with the
+   standard sections.
+2. Commit. Message: `meta: bootstrap week <year>-W<NN>`.
 
 **Generating the weekly report**:
 
@@ -106,7 +105,32 @@ The canonical pattern at
 defines `meta/` components as building blocks picked à la carte. The
 choices here are:
 
-### 1. No `INTERNAL_LOG.md`
+### 1. No `STATE.md`
+
+The canonical pattern uses `STATE.md` as the per-session entry point
+and the home of the live, overwrite-in-place view: current focus,
+standing per-project status, and what's coming up. **This repo
+doesn't keep one**, for two reasons:
+
+- **Redundancy.** The narrative "current focus" duplicated the
+  current week's `log/` entry, and the standing per-project status
+  duplicated state that already lives in each project's own repo
+  (its `STATE.md` / `INTERNAL_LOG.md`). This log is deliberately a
+  per-week *retrospective* record, not a place that re-hosts other
+  projects' live state.
+- **Staleness.** An overwrite-in-place file carries a real
+  maintenance cost, and when it lags a session that enters through
+  it gets a wrong picture — worse than having no such file. (The
+  `STATE.md` that used to live here had drifted ~3 weeks before it
+  was removed.)
+
+The session entry point is therefore this `README.md` (workflow and
+conventions) plus the most recent `log/<year>/<year>-WNN.md` (what's
+currently in flight). Anything that would have been "what's coming
+up" lives as an open bullet in the relevant week's entry until it
+resolves, at which point it gets a "done" annotation in a later week.
+
+### 2. No `INTERNAL_LOG.md`
 
 The canonical pattern allows `INTERNAL_LOG.md` for chronological
 session-by-session records. **This repo doesn't need one** because
@@ -114,7 +138,7 @@ the `log/<year>/<year>-WNN.md` files are themselves the chronological
 record. Adding a session log on top of a week log would duplicate
 the same information at two granularities.
 
-### 2. No `CONTEXT.md`
+### 3. No `CONTEXT.md`
 
 The canonical pattern allows `CONTEXT.md` for stable project context
 that doesn't fit `STATE.md`. **This repo doesn't need one** because
@@ -122,7 +146,7 @@ there is no static project context — each week has its own scope, and
 the conventions/structure of the repo are documented in this README
 rather than in a separate context file.
 
-### 3. No `TRACKER.md`
+### 4. No `TRACKER.md`
 
 The canonical pattern recommends `TRACKER.md` at the repo root for
 decisions, action items, comms log, etc. **This repo doesn't need
@@ -137,7 +161,7 @@ one** because:
 - The comms log is a section inside the weekly entry when relevant,
   not a separate file.
 
-### 4. The log directory is the project's actual work
+### 5. The log directory is the project's actual work
 
 In project repos, the substantive work lives in `code/`, `data/`,
 `docs/`, etc. Here, the substantive work *is* the log. So `log/` is

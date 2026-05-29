@@ -18,10 +18,9 @@ per project. The intended use is twofold:
 
 ## Where to start
 
-- **Current state:** [`meta/STATE.md`](meta/STATE.md) — what I'm
-  working on this week and the week's pulse.
 - **This week's log:** the most recent file in `log/<year>/`, named
-  by ISO week (e.g. `2026-W18.md`).
+  by ISO week (e.g. `2026-W22.md`). This is the live view of what
+  I'm working on this week.
 - **Workflow rules and pattern alignment:**
   [`meta/README.md`](meta/README.md).
 
@@ -31,7 +30,6 @@ per project. The intended use is twofold:
 work-log/
 ├── README.md            ← this file
 ├── meta/
-│   ├── STATE.md         ← live "this week" view
 │   └── README.md        ← workflow + deviations from the canonical pattern
 └── log/
     └── 2026/

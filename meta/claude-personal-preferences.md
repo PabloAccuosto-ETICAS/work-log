@@ -23,6 +23,23 @@ instructions, or the canonical pattern in `ai-ops`.
 
 When in doubt about whether a change is "routine", branch.
 
+## Session start: confirm the goal before starting work
+
+**Orient first, then confirm the session's focus with Pablo before
+beginning any work.** After the start-of-session reads (project
+instructions, this file, `STATE.md`, and `CONTEXT.md` when needed),
+give a short summary of where things stand and the candidate next
+steps — then ask Pablo what he wants to do this session. The pending
+items in `STATE.md` are *candidates*, not a standing agenda: Pablo
+sets the agenda each session. Don't start drafting, building, or
+editing until he has confirmed the focus.
+
+This is a deliberate session-opening exception to "state assumptions
+inline rather than asking permission" below — it applies to *what to
+work on at the start of a session*, not to execution once the focus
+is agreed. Orientation reads and the situational summary proceed
+without asking; the pause is before starting the actual work.
+
 ## Communication
 
 **Direct recommendations over option lists.** When one option is
